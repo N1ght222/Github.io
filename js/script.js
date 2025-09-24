@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const revealBtn = document.getElementById('revealBtn');
   const surprise = document.getElementById('surprise');
   const bgm = document.getElementById('bgm');
-  const menuBtn = document.getElementById('menuBtn');
 
   // Запуск музыки и открытие сюрприза при нажатии
   revealBtn.addEventListener('click', () => {
@@ -17,11 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
       surprise.classList.add('hidden');
       revealBtn.textContent = 'Открыть сюрприз';
     }
-  });
-
-  // Кнопка в меню (можно заменить на переход)
-  menuBtn.addEventListener('click', () => {
-    alert("Здесь можно сделать переход в меню или на другую страницу");
   });
 
   // Эффект падающих сердечек
