@@ -3,7 +3,6 @@
   --card-bg: #111;
   --accent: #ff6b9a;
   --text: #fff;
-  --muted: #ccc;
 }
 
 *{box-sizing:border-box;}
@@ -89,12 +88,6 @@ button:hover{
 
 .hidden{
   display:none;
-}
-
-footer{
-  margin-top:auto;
-  color:var(--muted);
-  font-size:13px;
 }
 
 /* Эффект сердечек */
