@@ -1,18 +1,15 @@
-// Минимальная логика: показать скрытый блок и добавить простую анимацию
 document.addEventListener('DOMContentLoaded', () => {
   const revealBtn = document.getElementById('revealBtn');
   const surprise = document.getElementById('surprise');
   const bgm = document.getElementById('bgm');
 
-  // Запускаем музыку при первом клике по странице
-  function startMusic() {
-    bgm.play().catch(() => {});
-    document.body.removeEventListener('click', startMusic);
-  }
-  document.body.addEventListener('click', startMusic);
-
-  // Логика кнопки сюрприза
   revealBtn.addEventListener('click', () => {
+    // Запуск музыки при первом нажатии
+    if (bgm.paused) {
+      bgm.play().catch(() => {});
+    }
+
+    // Логика открытия/скрытия сюрприза
     if (surprise.classList.contains('hidden')) {
       surprise.classList.remove('hidden');
       surprise.animate(
