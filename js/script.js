@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const revealBtn = document.getElementById('revealBtn');
   const surprise = document.getElementById('surprise');
   const bgm = document.getElementById('bgm');
-document.body.addEventListener('click', function once() {
+  document.getElementById('bgm').play() {
   bgm.play().catch(()=>{}); // начнёт играть при первом клике по странице
   document.body.removeEventListener('click', once);
 });
