@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgm = document.getElementById('bgm');
   const menuBtn = document.getElementById('menuBtn');
 
-  // Запуск музыки и сюрприза при нажатии на кнопку
+  // Запуск музыки и открытие сюрприза при нажатии
   revealBtn.addEventListener('click', () => {
     if (bgm.paused) {
       bgm.play().catch(() => {});
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Кнопка в меню (можешь заменить на переход)
+  // Кнопка в меню (можно заменить на переход в другую страницу)
   menuBtn.addEventListener('click', () => {
     alert("Здесь можно сделать переход в меню или на другую страницу");
   });
@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     heart.classList.add('heart');
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.animationDuration = (3 + Math.random() * 3) + 's';
-    heart.style.fontSize = (10 + Math.random() * 20) + 'px';
     heartsContainer.appendChild(heart);
 
     setTimeout(() => {
