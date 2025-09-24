@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const surprise = document.getElementById('surprise');
   const bgm = document.getElementById('bgm');
   document.getElementById('bgm').play() {
-  bgm.play().catch(()=>{}); // начнёт играть при первом клике по странице
-  document.body.removeEventListener('click', once);
-});
+    bgm.play().catch(()=>{}); // начнёт играть при первом клике по странице
+    document.body.removeEventListener('click', once);
+  });
 
   revealBtn.addEventListener('click', () => {
     if (surprise.classList.contains('hidden')) {
