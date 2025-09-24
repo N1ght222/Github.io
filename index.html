@@ -5,36 +5,35 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Открытка для тебя 💌</title>
   <link rel="stylesheet" href="styles.css" />
-<link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
-<audio id="bgm" src="music.mp3" loop></audio>
 <body>
   <main class="card">
-    <div class="left">
-      <img src="gif.gif" alt="Для тебя" class="hero" />
-    </div>
-
     <div class="right">
       <h1>Моей любимой 💖</h1>
       <p class="message">
-        Я хотел(а) сказать тебе, что ты — самый светлый луч в моей жизни. Спасибо, что ты есть.
+        Ты делаешь мою жизнь ярче каждый день. Спасибо, что ты есть.
       </p>
 
       <div class="controls">
         <button id="revealBtn">Открыть сюрприз</button>
+        <button id="menuBtn">В меню</button>
       </div>
 
       <div id="surprise" class="surprise hidden">
-        <p>Ты делаешь мою жизнь лучше каждый день💖✨</p>
+        <p>Люблю тебя 💖✨</p>
       </div>
 
       <footer>
-        <small>Люблю тебя, <strong>моя любимая</strong></small>
+        <small>С любовью, <strong>Твоё имя</strong></small>
       </footer>
     </div>
   </main>
 
+  <audio id="bgm" src="music.mp3" loop></audio>
+
+  <!-- Эффект сердечек -->
+  <div id="hearts-container"></div>
+
   <script src="script.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
