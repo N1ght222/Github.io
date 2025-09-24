@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const surprise = document.getElementById('surprise');
   const bgm = document.getElementById('bgm');
 
-  // Запуск музыки и открытие сюрприза при нажатии
   revealBtn.addEventListener('click', () => {
     if (bgm.paused) {
       bgm.play().catch(() => {});
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Эффект падающих сердечек
   const heartsContainer = document.getElementById('hearts-container');
   function createHeart() {
     const heart = document.createElement('div');
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.animationDuration = (3 + Math.random() * 3) + 's';
     heartsContainer.appendChild(heart);
-
     setTimeout(() => {
       heartsContainer.removeChild(heart);
     }, 5000);
