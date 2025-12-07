@@ -1,36 +1,174 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Открытка для тебя 💌</title>
-  <link rel="stylesheet" href="css/styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Моей Любимой</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        overflow-x: hidden;
+        font-family: "Poppins", sans-serif;
+    }
+
+    /* Туман */
+    .fog {
+        position: fixed;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background: radial-gradient(circle, rgba(255,0,150,0.08), transparent 70%);
+        animation: fogMove 25s ease-in-out infinite alternate;
+        filter: blur(80px);
+        z-index: -2;
+    }
+
+    @keyframes fogMove {
+        0%   { transform: translate(0, 0); }
+        100% { transform: translate(200px, -200px); }
+    }
+
+    h1 {
+        text-align: center;
+        color: #ff4dd8;
+        font-size: 46px;
+        margin-top: 40px;
+        text-shadow: 0 0 10px #ff4dd8, 0 0 20px #ff00b3, 0 0 50px #ff00ff;
+        animation: fade 1.5s ease;
+    }
+
+    @keyframes fade {
+        from { opacity: 0; transform: translateY(-20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    button {
+        display: block;
+        margin: 25px auto;
+        padding: 14px 26px;
+        background: #ff009d;
+        border: none;
+        color: white;
+        font-size: 20px;
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: 0 0 15px #ff00cc, 0 0 40px #ff00cc;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.07);
+        box-shadow: 0 0 25px #ff00cc, 0 0 60px #ff00cc;
+    }
+
+    .content {
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 25px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: #ffb3f0;
+        border: 2px solid #ff33cc;
+        border-radius: 20px;
+        box-shadow: 0 0 20px #ff00c8, inset 0 0 20px #ff00a8;
+        opacity: 0;
+        transition: 1s ease;
+        white-space: pre-wrap;
+    }
+
+    /* Падающие сердечки */
+    .heart {
+        position: fixed;
+        top: -20px;
+        color: #ff3bbd;
+        pointer-events: none;
+        text-shadow: 0 0 8px #ff008c, 0 0 20px #ff00b3;
+        animation: fall linear;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(120vh);
+            opacity: 0;
+        }
+    }
+
+    @media(max-width: 600px){
+        h1 { font-size: 34px; }
+        .content { font-size: 16px; padding: 20px; }
+    }
+</style>
 </head>
+
 <body>
-  <main class="card">
-    <div class="left">
-      <img src="gif.gif" alt="Для тебя" class="hero" />
-    </div>
 
-    <div class="right">
-      <h1>Моей любимой 💖</h1>
-      <p class="message">
-        Я хотел сказать тебе, что ты — самый светлый луч в моей жизни. Спасибо, что ты есть.
-      </p>
+<div class="fog"></div>
 
-      <div class="controls">
-        <button id="revealBtn">Открыть сюрприз</button>
-      </div>
+<h1>Моей Любимой</h1>
 
-      <div id="surprise" class="surprise hidden">
-        <p>Люблю тебя 💖✨</p>
-      </div>
-    </div>
-  </main>
+<button id="revealBtn">Нажми 💗</button>
 
-  <audio id="bgm" src="music.mp3" loop></audio>
-  <div id="hearts-container"></div>
+<div class="content" id="textBox"></div>
 
-  <script src="js/script.js"></script>
+<script>
+/* Текст по символам */
+let text = `С днём рождения, Насть! 🎉
+
+Я хочу, чтобы у тебя было всё самое лучшее — хорошие оценки, отличное настроение, чтобы брат слушался, и чтобы ты оставалась такой же прекрасной, какой я тебя знаю.
+
+Но честно, всё это время я думал о нас. Я думал о том, как было легко и приятно общаться с тобой в начале, как я чувствовал твой интерес, и как тогда мне казалось, что я могу видеть наше будущее…
+
+А потом я начал замечать, что что-то изменилось. Я пишу, интересуюсь, предлагаю, а твои ответы стали короче, осторожнее, холоднее…
+
+Мне сложно от этого, но я просто хочу честности. Хочу видеть чувства в действиях, а не только в словах.
+
+Я думаю обо всём этом часто… и всё равно надеюсь, что у нас всё будет прекрасно.
+
+Насть, пожалуйста, покажи свой ответ действиями. Я надеюсь, что он будет тем, который я жду больше всего. ❤️`;
+
+let i = 0;
+let speed = 40;
+
+document.getElementById("revealBtn").onclick = function() {
+    let box = document.getElementById("textBox");
+    box.style.opacity = 1;
+    this.style.display = "none";
+
+    function type() {
+        if (i < text.length) {
+            box.textContent += text[i];
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+};
+
+/* Падающие сердечки */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 20) + "px";
+    
+    const fallDuration = 3 + Math.random() * 4;
+    heart.style.animationDuration = fallDuration + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), fallDuration * 1000);
+}
+
+setInterval(createHeart, 250);
+</script>
+
 </body>
 </html>
