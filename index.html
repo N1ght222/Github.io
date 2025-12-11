@@ -82,6 +82,29 @@
         white-space: pre-wrap;
     }
 
+    /* Нижний блок */
+    .bottom-block {
+        margin-top: 50px;
+        text-align: center;
+        opacity: 0;
+        transition: 1.5s ease;
+        padding-bottom: 40px;
+    }
+
+    .bottom-text {
+        color: #ff4dd8;
+        font-size: 32px;
+        text-shadow: 0 0 10px #ff4dd8, 0 0 25px #ff00ff;
+        margin-bottom: 20px;
+    }
+
+    .bottom-gif {
+        width: 85%;
+        max-width: 400px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px #ff00c8, 0 0 40px #ff00ff;
+    }
+
     /* Падающие сердечки */
     .heart {
         position: fixed;
@@ -102,6 +125,7 @@
     @media(max-width: 600px){
         h1 { font-size: 34px; }
         .content { font-size: 16px; padding: 20px; }
+        .bottom-text { font-size: 26px; }
     }
 </style>
 </head>
@@ -110,13 +134,38 @@
 
 <div class="fog"></div>
 
+<!-- Музыка (файл лежит рядом с этим HTML) -->
+<audio id="bgMusic" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <h1>Моей Любимой</h1>
 
 <button id="revealBtn">Нажми 💗</button>
 
 <div class="content" id="textBox"></div>
 
+<!-- Нижняя часть -->
+<div class="bottom-block" id="bottomBlock">
+    <div class="bottom-text">А это мы, любимая ❤️</div>
+    <img src="baby-baby002.gif" class="bottom-gif">
+</div>
+
 <script>
+/* Попытка автозапуска музыки + обход блокировок */
+document.addEventListener("DOMContentLoaded", () => {
+    const music = document.getElementById("bgMusic");
+
+    const tryPlay = () => {
+        music.play().catch(() => {
+            document.addEventListener("touchstart", () => music.play(), { once: true });
+            document.addEventListener("click", () => music.play(), { once: true });
+        });
+    };
+
+    tryPlay();
+});
+
 /* Текст по символам */
 let text = `С днём рождения, Насть! 🎉
 
@@ -129,6 +178,8 @@ let speed = 40;
 
 document.getElementById("revealBtn").onclick = function() {
     let box = document.getElementById("textBox");
+    let bottom = document.getElementById("bottomBlock");
+
     box.style.opacity = 1;
     this.style.display = "none";
 
@@ -137,6 +188,8 @@ document.getElementById("revealBtn").onclick = function() {
             box.textContent += text[i];
             i++;
             setTimeout(type, speed);
+        } else {
+            bottom.style.opacity = 1;
         }
     }
     type();
