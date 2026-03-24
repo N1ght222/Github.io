@@ -3,229 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Моей Любимой - С 8 Марта</title>
-
+<title>С днём рождения</title>
 <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-        margin: 0;
-        padding: 0;
         background: #000;
-        overflow-x: hidden;
-        font-family: "Poppins", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: "Georgia", serif;
     }
 
-    /* Туман */
-    .fog {
-        position: fixed;
-        width: 200%;
-        height: 200%;
-        top: -50%;
-        left: -50%;
-        background: radial-gradient(circle, rgba(255,0,150,0.08), transparent 70%);
-        animation: fogMove 25s ease-in-out infinite alternate;
-        filter: blur(80px);
-        z-index: -2;
-    }
-
-    @keyframes fogMove {
-        0%   { transform: translate(0, 0); }
-        100% { transform: translate(200px, -200px); }
-    }
-
-    h1 {
-        text-align: center;
-        color: #ff4dd8;
-        font-size: 46px;
-        margin-top: 40px;
-        text-shadow: 0 0 10px #ff4dd8, 0 0 20px #ff00b3, 0 0 50px #ff00ff;
-        animation: fade 1.5s ease;
-    }
-
-    @keyframes fade {
-        from { opacity: 0; transform: translateY(-20px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-
-    button {
-        display: block;
-        margin: 25px auto;
-        padding: 14px 26px;
-        background: #ff009d;
-        border: none;
-        color: white;
-        font-size: 20px;
-        border-radius: 15px;
-        cursor: pointer;
-        box-shadow: 0 0 15px #ff00cc, 0 0 40px #ff00cc;
-        transition: 0.2s;
-    }
-
-    button:hover {
-        transform: scale(1.07);
-        box-shadow: 0 0 25px #ff00cc, 0 0 60px #ff00cc;
-    }
-
-    .content {
-        width: 90%;
-        max-width: 900px;
-        margin: 0 auto;
-        margin-top: 20px;
-        padding: 25px;
-        font-size: 18px;
-        line-height: 1.6;
-        color: #ffb3f0;
+    .frame {
+        padding: 40px 60px;
         border: 2px solid #ff33cc;
-        border-radius: 20px;
-        box-shadow: 0 0 20px #ff00c8, inset 0 0 20px #ff00a8;
-        opacity: 0;
-        transition: 1s ease;
-        white-space: pre-wrap;
-    }
-
-    /* Нижний блок */
-    .bottom-block {
-        margin-top: 50px;
+        border-radius: 18px;
+        box-shadow:
+            0 0 8px #ff33cc,
+            0 0 20px #ff33cc,
+            0 0 50px #ff00b3,
+            inset 0 0 20px rgba(255, 0, 179, 0.08);
+        animation: pulse 3s ease-in-out infinite;
         text-align: center;
-        opacity: 0;
-        transition: 1.5s ease;
-        padding-bottom: 40px;
     }
 
-    .bottom-text {
-        color: #ff4dd8;
-        font-size: 32px;
-        text-shadow: 0 0 10px #ff4dd8, 0 0 25px #ff00ff;
-        margin-bottom: 20px;
-    }
-
-    .bottom-gif {
-        width: 85%;
-        max-width: 400px;
-        border-radius: 20px;
-        box-shadow: 0 0 20px #ff00c8, 0 0 40px #ff00ff;
-    }
-
-    /* Падающие сердечки */
-    .heart {
-        position: fixed;
-        top: -20px;
-        color: #ff3bbd;
-        pointer-events: none;
-        text-shadow: 0 0 8px #ff008c, 0 0 20px #ff00b3;
-        animation: fall linear;
-    }
-
-    @keyframes fall {
-        to {
-            transform: translateY(120vh);
-            opacity: 0;
+    @keyframes pulse {
+        0%, 100% {
+            box-shadow:
+                0 0 8px #ff33cc,
+                0 0 20px #ff33cc,
+                0 0 50px #ff00b3,
+                inset 0 0 20px rgba(255, 0, 179, 0.08);
+        }
+        50% {
+            box-shadow:
+                0 0 12px #ff66dd,
+                0 0 35px #ff33cc,
+                0 0 80px #ff00cc,
+                inset 0 0 30px rgba(255, 0, 200, 0.13);
         }
     }
 
-    @media(max-width: 600px){
-        h1 { font-size: 34px; }
-        .content { font-size: 16px; padding: 20px; }
-        .bottom-text { font-size: 26px; }
+    .text {
+        color: #ff4dd8;
+        font-size: 36px;
+        text-shadow:
+            0 0 8px #ff4dd8,
+            0 0 20px #ff00b3,
+            0 0 45px #ff00ff;
+        letter-spacing: 0.03em;
+        animation: fadein 1.2s ease;
+    }
+
+    @keyframes fadein {
+        from { opacity: 0; transform: scale(0.96); }
+        to   { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 500px) {
+        .frame { padding: 30px 30px; }
+        .text { font-size: 26px; }
     }
 </style>
 </head>
-
 <body>
-
-<div class="fog"></div>
-
-<!-- Музыка (файл music.mp3 должен лежать рядом с этим HTML) -->
-<audio id="bgMusic" autoplay loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<h1>Моей Любимой</h1>
-<h1>С 8 Марта 🌸</h1>
-
-<button id="revealBtn">Нажми 💗</button>
-
-<div class="content" id="textBox"></div>
-
-<!-- Нижняя часть -->
-<div class="bottom-block" id="bottomBlock">
-    <div class="bottom-text">А это мы, любимая ❤️</div>
-    <img src="baby-baby002.gif" class="bottom-gif">
-</div>
-
-<script>
-/* Попытка автозапуска музыки + обход блокировок */
-document.addEventListener("DOMContentLoaded", () => {
-    const music = document.getElementById("bgMusic");
-
-    const tryPlay = () => {
-        music.play().catch(() => {
-            document.addEventListener("touchstart", () => music.play(), { once: true });
-            document.addEventListener("click", () => music.play(), { once: true });
-        });
-    };
-
-    tryPlay();
-});
-
-/* Текст поздравления */
-let text = `С 8 Марта 🌸
-
-В этот весенний день я хочу сказать тебе самое главное -
-спасибо что ты у меня есть.
-Не только потому что ты красивая и милая, а и потому что мне с тобой по настоящему хорошо.
-
-Я тебя очень люблю, по-настоящему.
-На столько что, рядом с тобой хочется улыбаться,
-беречь, заботиться и просто быть рядом как можно дольше.
-
-Я желаю, чтобы у тебя было всё самое лучшее - хорошие оценки, отличное настроение, и чтобы ты оставалась такой же прекрасной, какой я тебя знаю, ты моё маленькое чудо, с которым я бы хотел провести всю жизнь.
-Пусть эта весна будет для тебя особенной.
-Пусть ты чаще улыбаешься, чувствуешь себя любимой
-и всегда помнишь, какая ты прекрасная 💗
-
-Я тебя люблю ❤️`;
-
-let i = 0;
-let speed = 40;
-
-document.getElementById("revealBtn").onclick = function() {
-    let box = document.getElementById("textBox");
-    let bottom = document.getElementById("bottomBlock");
-
-    box.style.opacity = 1;
-    this.style.display = "none";
-
-    function type() {
-        if (i < text.length) {
-            box.textContent += text[i];
-            i++;
-            setTimeout(type, speed);
-        } else {
-            bottom.style.opacity = 1;
-        }
-    }
-    type();
-};
-
-/* Падающие сердечки */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (18 + Math.random() * 20) + "px";
-
-    const fallDuration = 3 + Math.random() * 4;
-    heart.style.animationDuration = fallDuration + "s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), fallDuration * 1000);
-}
-
-setInterval(createHeart, 250);
-</script>
-
+    <div class="frame">
+        <span class="text">С днём рождения тебя)</span>
+    </div>
 </body>
 </html>
