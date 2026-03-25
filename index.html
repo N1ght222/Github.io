@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>С днём рождения</title>
+<title>С днём рождения тебя, принцесса миленькая 🥹🫶</title>
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -62,6 +63,22 @@
         to   { opacity: 1; transform: scale(1); }
     }
 
+    .gif-wrap {
+        margin-top: 35px;
+        text-align: center;
+        animation: fadein 1.8s ease;
+    }
+
+    .gif-wrap img {
+        width: 85%;
+        max-width: 380px;
+        border-radius: 16px;
+        box-shadow:
+            0 0 10px #ff33cc,
+            0 0 30px #ff00b3,
+            0 0 60px #ff00ff;
+    }
+
     @media (max-width: 500px) {
         .frame { padding: 30px 30px; }
         .text { font-size: 26px; }
@@ -69,8 +86,13 @@
 </style>
 </head>
 <body>
-    <div class="frame">
-        <span class="text">С днём рождения тебя)</span>
+    <div style="display:flex; flex-direction:column; align-items:center; padding: 60px 20px;">
+        <div class="frame">
+            <span class="text">С днём рождения тебя)</span>
+        </div>
+        <div class="gif-wrap">
+            <img src="1.gif" alt="">
+        </div>
     </div>
 </body>
 </html>
