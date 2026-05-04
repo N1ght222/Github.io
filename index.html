@@ -1,355 +1,168 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>С Днём Рождения)) </title>
+<title>I Love You</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: #000;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
   }
-
-  /* ── START ── */
-  #start-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 44px;
-    z-index: 10;
+  h1 {
+    color: #7ecfff;
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-family: 'Dancing Script', cursive;
+    text-shadow: 0 0 8px #4ab8ff, 0 0 25px #2299ee, 0 0 55px #0066cc;
+    margin-bottom: 10px;
+    animation: textPulse 2.5s ease-in-out infinite;
   }
-  #start-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.4rem, 5vw, 2.6rem);
-    color: #ff2d78;
-    text-shadow: 0 0 24px #ff2d78, 0 0 60px #ff006699;
-    letter-spacing: 6px;
+  @keyframes textPulse {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; text-shadow: 0 0 15px #88ddff, 0 0 45px #44aaff, 0 0 80px #2277dd; }
   }
-  #btn {
-    font-family: 'Courier New', monospace;
-    font-size: clamp(1rem, 3vw, 1.4rem);
-    padding: 16px 52px;
-    background: transparent;
-    color: #ff2d78;
-    border: 2px solid #ff2d78;
-    cursor: pointer;
-    letter-spacing: 4px;
-    box-shadow: 0 0 20px #ff2d7866, inset 0 0 16px #ff2d7811;
-    transition: all 0.2s;
-  }
-  #btn:hover {
-    background: #ff2d7822;
-    box-shadow: 0 0 40px #ff2d78aa;
-    color: #fff;
-  }
-  #btn:active { transform: scale(0.96); }
-
-  /* ── COUNTDOWN ── */
-  #countdown {
-    display: none;
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(6rem, 25vw, 16rem);
-    color: #ff2d78;
-    text-shadow: 0 0 40px #ff2d78, 0 0 100px #ff006688;
-    z-index: 10;
-    animation: cdpulse 1s ease-in-out infinite;
-  }
-  @keyframes cdpulse {
-    0%,100% { transform: scale(1); }
-    50%      { transform: scale(1.1); }
-  }
-
-  /* ── CANVAS ── */
-  #matrix-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    display: none;
-    z-index: 1;
-  }
-
-  /* ── WORD ── */
-  #word-display {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    pointer-events: none;
-  }
-  #word-text {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(3rem, 13vw, 10rem);
-    font-weight: 900;
-    color: #ffe0f0;
-    text-shadow: 0 0 12px #ff2d78, 0 0 36px #ff2d78, 0 0 90px #ff006688;
-    letter-spacing: 8px;
-    text-align: center;
-    padding: 0 20px;
-  }
-  .word-in  { animation: wIn  0.45s cubic-bezier(0.17,0.89,0.32,1.28) forwards; }
-  .word-out { animation: wOut 0.4s ease-in forwards; }
-  @keyframes wIn  {
-    from { transform: scale(0.2) rotateX(70deg); opacity: 0; }
-    to   { transform: scale(1)   rotateX(0deg);  opacity: 1; }
-  }
-  @keyframes wOut {
-    from { transform: scale(1);   opacity: 1; }
-    to   { transform: scale(1.4); opacity: 0; }
-  }
-
-  /* ── FINAL ── */
-  #final {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 28px;
-    z-index: 20;
-  }
-  #final-bg {
-    position: absolute;
-    inset: 0;
-    background: #000;
-    animation: bgIn 1.2s forwards;
-  }
-  @keyframes bgIn { from { opacity:0; } to { opacity:0.9; } }
-  #final-text {
-    position: relative;
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.4rem, 5vw, 3.5rem);
-    font-weight: 900;
-    color: #ffe0f0;
-    text-shadow: 0 0 20px #ff2d78, 0 0 60px #ff006688;
-    text-align: center;
-    padding: 0 28px;
-    line-height: 1.7;
-    animation: fIn 0.9s 0.5s cubic-bezier(0.17,0.89,0.32,1.2) both;
-  }
-  #final-hearts {
-    position: relative;
-    font-size: clamp(2rem, 6vw, 4rem);
-    letter-spacing: 12px;
-    animation: fIn 0.9s 1s both;
-  }
-  @keyframes fIn {
-    from { transform: translateY(50px) scale(0.7); opacity: 0; }
-    to   { transform: translateY(0)    scale(1);   opacity: 1; }
-  }
+  canvas { display: block; }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div id="start-screen">
-  <div id="start-title">💖</div>
-  <button id="btn">Нажать</button>
-</div>
-
-<div id="countdown">3</div>
-<canvas id="matrix-canvas"></canvas>
-
-<div id="word-display">
-  <div id="word-text"></div>
-</div>
-
-<div id="final">
-  <div id="final-bg"></div>
-  <div id="final-text">С днём рождения ангелочка на свет(тоесть тебя 🫶) 🥹<br></div>
-  <div id="final-hearts">🥹🫶</div>
-</div>
-
+<h1>I Love You</h1>
+<canvas id="c"></canvas>
 <script>
-// ─────────────────────────────────────────────────────────
-//  MATRIX  –  1:1 like the photo
-//  • Black background
-//  • Columns of uppercase Latin letters + digits
-//  • Pink/magenta palette — bright head, fading tail
-//  • Monospace Courier New  (same vibe as the photo's font)
-// ─────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
 
-const canvas = document.getElementById('matrix-canvas');
-const ctx    = canvas.getContext('2d');
+const W = window.innerWidth;
+const H = window.innerHeight * 0.78;
+canvas.width = W;
+canvas.height = H;
 
-const FS     = 15;   // font-size / cell size in px
-const CHARS  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-
-function rChar() { return CHARS[Math.floor(Math.random() * CHARS.length)]; }
-
-// Returns a CSS colour for a given depth in a column stream
-function depthColour(d, len) {
-  if (d === 0) return '#ffccee';   // brightest head — near white-pink
-  const t = d / len;
-  if (t < 0.12) return '#ff80c0';
-  if (t < 0.28) return '#ff2d78';
-  if (t < 0.50) return '#e6006b';
-  if (t < 0.70) return '#b30055';
-  if (t < 0.88) return '#800040';
-  return '#4d0026';
+// Проверяем, лежит ли точка (x,y) внутри 2D сердца
+// Сердце задано параметрически: hx=16sin³t, hy=-(13cos t - 5cos2t - 2cos3t - cos4t)
+// Используем упрощённую аналитическую формулу: (x²+y²-1)³ - x²y³ <= 0
+function insideHeart(x, y) {
+  // нормализуем под стандартную формулу
+  const nx = x / 8;
+  const ny = -y / 8 + 0.5; // сдвиг чтобы сердце было по центру
+  const v = Math.pow(nx*nx + ny*ny - 1, 3) - nx*nx * ny*ny*ny;
+  return v <= 0;
 }
 
-let drops      = [];
-let matrixOn   = true;
-let fadeAlpha  = 1;
-let raf;
+const particles = [];
+const NUM = 3000;
 
-function initMatrix() {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const totalCols = Math.floor(canvas.width / FS);
-  drops = [];
-  for (let i = 0; i < totalCols; i++) {
-    drops.push({
-      y      : Math.floor(Math.random() * -(canvas.height / FS)),
-      speed  : 0.25 + Math.random() * 0.85,
-      len    : 10 + Math.floor(Math.random() * 24),
-      chars  : Array.from({ length: 40 }, rChar),
-      tick   : 0,
-      mutate : 3 + Math.floor(Math.random() * 6),
-    });
-  }
+// Rejection sampling: генерируем случайные точки в bounding box сердца
+// и оставляем только те, что внутри
+let attempts = 0;
+while (particles.length < NUM && attempts < NUM * 15) {
+  attempts++;
+
+  // Диапазон сердца: x от -17 до 17, y от -14 до 10
+  const hx = (Math.random() * 2 - 1) * 17;
+  const hy = (Math.random() * 2 - 1) * 14;
+
+  if (!insideHeart(hx, hy)) continue;
+
+  // Глубина z — случайная в пределах толщины сердца (эллипсоид)
+  // Толщина зависит от позиции внутри сердца
+  const maxZ = 8 * Math.sqrt(Math.max(0, 1 - (hx/17)*(hx/17) - (hy/14)*(hy/14)));
+  const z = (Math.random() * 2 - 1) * maxZ;
+
+  const brightness = 0.3 + Math.random() * 0.7;
+  const size = 0.5 + Math.random() * 1.8;
+
+  particles.push({ ox: hx, oy: hy, oz: z, brightness, size });
 }
 
-function drawMatrix() {
-  // semi-transparent black overlay → motion-blur trail effect
-  ctx.fillStyle = 'rgba(0,0,0,0.06)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+let angle = 0;
+const CX = W / 2;
+const CY = H / 2;
+const SCALE = Math.min(W, H) * 0.026;
 
-  ctx.font      = `${FS}px "Courier New", monospace`;
-  ctx.textAlign = 'center';
+function render() {
+  ctx.clearRect(0, 0, W, H);
 
-  for (let i = 0; i < drops.length; i++) {
-    const d = drops[i];
+  const cosA = Math.cos(angle);
+  const sinA = Math.sin(angle);
 
-    // randomly mutate one char in the column each few frames
-    d.tick++;
-    if (d.tick >= d.mutate) {
-      d.tick = 0;
-      d.chars[Math.floor(Math.random() * d.chars.length)] = rChar();
-    }
+  const proj = [];
+  for (const p of particles) {
+    // Вращение по оси Y
+    const rx = p.ox * cosA - p.oz * sinA;
+    const rz = p.ox * sinA + p.oz * cosA;
+    const ry = p.oy;
 
-    for (let j = 0; j < d.len; j++) {
-      const row = Math.floor(d.y) - j;
-      if (row < 0 || row * FS > canvas.height) continue;
-      const alpha = (1 - j / d.len) * fadeAlpha;
-      if (alpha <= 0.01) continue;
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle   = depthColour(j, d.len);
-      const ch = d.chars[((Math.floor(d.y) - j) % d.chars.length + d.chars.length) % d.chars.length];
-      ctx.fillText(ch, i * FS + FS / 2, row * FS + FS);
-    }
-    ctx.globalAlpha = 1;
+    const fov = 400;
+    const depth = fov + rz * SCALE;
+    if (depth <= 0) continue;
 
-    d.y += d.speed;
-    if ((d.y - d.len) * FS > canvas.height) {
-      d.y    = Math.floor(Math.random() * -10);
-      d.speed = 0.25 + Math.random() * 0.85;
-      d.len   = 10 + Math.floor(Math.random() * 24);
-    }
-  }
-}
+    const px = CX + (rx * SCALE * fov) / depth;
+    const py = CY + (ry * SCALE * fov) / depth;
 
-function loop() {
-  if (!matrixOn) return;
-  drawMatrix();
-  raf = requestAnimationFrame(loop);
-}
+    if (!isFinite(px) || !isFinite(py)) continue;
 
-function fadeOutMatrix(cb) {
-  const dur = 2200;
-  let   start = null;
-  function step(ts) {
-    if (!start) start = ts;
-    fadeAlpha = Math.max(0, 1 - (ts - start) / dur);
-    drawMatrix();
-    if (fadeAlpha > 0) {
-      requestAnimationFrame(step);
-    } else {
-      matrixOn = false;
-      cancelAnimationFrame(raf);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      cb();
-    }
-  }
-  requestAnimationFrame(step);
-}
+    // Задние частицы темнее
+    const depthFactor = 0.45 + 0.55 * ((rz + 20) / 40);
+    const bright = Math.min(1, Math.max(0.05, p.brightness * depthFactor));
 
-// ── COUNTDOWN ───────────────────────────────────────────
-const startScreen = document.getElementById('start-screen');
-const cdEl        = document.getElementById('countdown');
-const btn         = document.getElementById('btn');
-
-btn.addEventListener('click', () => {
-  startScreen.style.display = 'none';
-  cdEl.style.display = 'block';
-  let n = 3;
-  cdEl.textContent = n;
-  const iv = setInterval(() => {
-    n--;
-    if (n <= 0) {
-      clearInterval(iv);
-      cdEl.style.display = 'none';
-      startMatrix();
-    } else {
-      cdEl.textContent = n;
-    }
-  }, 1000);
-});
-
-// ── WORDS ───────────────────────────────────────────────
-const WORDS       = ['С', 'Днём', 'Рождения', 'Ангелочка', 'На', 'Свет', '🥹🫶'];
-const wordDisplay = document.getElementById('word-display');
-const wordText    = document.getElementById('word-text');
-
-function startMatrix() {
-  canvas.style.display = 'block';
-  initMatrix();
-  matrixOn  = true;
-  fadeAlpha = 1;
-  raf = requestAnimationFrame(loop);
-  setTimeout(() => showWord(0), 1500);
-}
-
-function showWord(idx) {
-  if (idx >= WORDS.length) {
-    // All words shown — wait then fade matrix + show finale
-    setTimeout(() => {
-      fadeOutMatrix(() => {
-        canvas.style.display = 'none';
-        document.getElementById('final').style.display = 'flex';
-      });
-    }, 2000);
-    return;
+    proj.push({ px, py, rz, bright, size: p.size });
   }
 
-  // Animate IN
-  wordText.textContent = WORDS[idx];
-  wordText.className   = '';
-  void wordText.offsetWidth; // force reflow
-  wordText.className   = 'word-in';
-  wordDisplay.style.display = 'flex';
+  // Сортировка back→front
+  proj.sort((a, b) => a.rz - b.rz);
 
-  // After 2 s — animate OUT
-  setTimeout(() => {
-    wordText.className = 'word-out';
-    setTimeout(() => {
-      wordDisplay.style.display = 'none';
-      setTimeout(() => showWord(idx + 1), 500);
-    }, 400);
-  }, 2000);
+  // Тень-платформа под сердцем
+  const shadowY = CY + SCALE * 10;
+  const sg = ctx.createRadialGradient(CX, shadowY, 0, CX, shadowY, SCALE * 7);
+  sg.addColorStop(0, 'rgba(50,150,255,0.5)');
+  sg.addColorStop(0.4, 'rgba(20,80,200,0.2)');
+  sg.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.save();
+  ctx.translate(CX, shadowY);
+  ctx.scale(1, 0.18);
+  ctx.translate(-CX, -shadowY);
+  ctx.beginPath();
+  ctx.arc(CX, shadowY, SCALE * 7, 0, Math.PI * 2);
+  ctx.fillStyle = sg;
+  ctx.fill();
+  ctx.restore();
+
+  // Рисуем частицы
+  for (const p of proj) {
+    const rb = Math.round(80 + p.bright * 90);
+    const gb = Math.round(150 + p.bright * 70);
+    const glowSize = Math.max(0.5, p.size * 2.8);
+
+    try {
+      const grd = ctx.createRadialGradient(p.px, p.py, 0, p.px, p.py, glowSize);
+      grd.addColorStop(0, `rgba(${rb},${gb},255,${p.bright * 0.85})`);
+      grd.addColorStop(0.45, `rgba(${rb},${gb},255,${p.bright * 0.25})`);
+      grd.addColorStop(1, `rgba(${rb},${gb},255,0)`);
+      ctx.beginPath();
+      ctx.arc(p.px, p.py, glowSize, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+    } catch(e) {}
+
+    // Ядро точки
+    ctx.beginPath();
+    ctx.arc(p.px, p.py, Math.max(0.3, p.size * 0.5), 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${rb},${gb},255,${p.bright})`;
+    ctx.fill();
+  }
+
+  angle += 0.013;
+  requestAnimationFrame(render);
 }
 
-window.addEventListener('resize', () => { if (matrixOn) initMatrix(); });
+render();
 </script>
 </body>
 </html>
